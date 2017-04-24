@@ -37,11 +37,31 @@
     </head>
     <body>
         <div class="app">
-            <h1>Apache Cordova</h1>
+            <h1>Jodle</h1>
+            <!--
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
+           -->
+           <form id="Connect">
+               <div class="form-group">
+                   <label for="nomUtil">Nom d'Utilisateur :</label>
+                   <input type="text" name="nomUtil" id="nomUtil" class="form-control" required="required"/>
+               </div>
+               <div class="form-group">
+                   <label for="motPasse">Mot de Passe :</label>
+                   <input type="text" name="motPasse" id="motPasse" class="form-control" required="required"/>
+               </div>
+               <button type="submit" class="btn btn-default" id="submit_connect_panel">Connecter</button>
+           </form>
+          <!--
+          <form action="/action_page.php">
+              Nom d'utilisateur: <input type="text" name="nomUtil"><br>
+              Mot de passe : <input type="text" name="motPasse"><br>
+              <input type="submit" value="Connecter" id="Connect">
+          </form>
+          -->
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
