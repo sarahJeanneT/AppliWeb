@@ -1,7 +1,9 @@
 document.addEventListener('deviceready', onDeviceReady ,false)
 
+
 function onDeviceReady ()
 {
+  $.support.cors = true
 
   $('#temporaire').click(function(){
     alert('temporaire')
@@ -10,7 +12,7 @@ function onDeviceReady ()
 
   $('#connect_form').submit(function(e){
 
-    $.get("jodle/messages", "", connect, "html");
+    $.get("http://129.88.240.172:8080/jodle/messages", "", connect, "html");
     e.preventDefault();
   })
 
