@@ -5,6 +5,7 @@ var server = require('http').createServer(app);
 var bodyParser = require('body-parser')  // envoie des paramètres en POST
 var io = require('socket.io')(server);
 var mustacheExpress = require('mustache-express');
+var db = require('./db/pg_jodle.js');
 //var surface_router = require('./routes/surfaces_ctrl');
 //var surface_services = require('./services/surfaces')
 
@@ -28,6 +29,26 @@ io.on('connect', function (socket){
         surface_services.animationOff(socket)
     })
 })
+
+app.get('/jodle/messages', function (req , res) {
+	nomUtil = req.query.nomUtil;
+  motPasse = req.query.motPasse;
+  console.log(nomUtil);
+  console.log(motPasse);
+	data = db.connect(function(error ,data)
+	{
+		if (error == null)
+      {
+      res.status(200).render('page1', {pseudoutilisateur : data});
+      console.log(data);
+      }
+		else
+			res.render('error', {message : error});
+	})
+
+  //res.render('page1');
+})
+
 
 //
 // le repertoire public va contenir les

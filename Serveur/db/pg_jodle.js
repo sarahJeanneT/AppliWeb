@@ -22,7 +22,7 @@ function getFonctions(trigo, callback)
 
 function getPseudoUtilisateur(callback)
 {
-    var requete = 'select pseudoutilisateur from public.utilisateur'
+    var requete = 'select pseudo from public.utilisateur'
     console.log(requete);
 
     db.any(requete, null)
