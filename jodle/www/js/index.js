@@ -9,7 +9,7 @@ function onDeviceReady ()
   })
 
   $('#connect_form').submit(function(e){
-
+    window.location = "page1.html"
     $.get("jodle/messages", "", connect, "html");
     e.preventDefault();
   })
@@ -17,5 +17,5 @@ function onDeviceReady ()
 }
 
 function connect(){
- window.location = "page1.html"
+
 }
