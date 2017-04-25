@@ -13,11 +13,14 @@ function onDeviceReady ()
   $('#connect_form').submit(function(e){
 
     $.get("http://129.88.240.172:8080/jodle/messages", "", connect, "html");
+
+    window.location = "page1.html"
+
     e.preventDefault();
   })
 
 }
 
 function connect(){
- window.location = "page1.html"
+
 }
