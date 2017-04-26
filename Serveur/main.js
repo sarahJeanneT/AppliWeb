@@ -31,11 +31,15 @@ io.on('connect', function (socket){
 })
 
 app.get('/jodle/messages', function (req , res) {
-	nomUtil = req.query.nomUtil;
+  /**
+  nomUtil = req.query.nomUtil;
   motPasse = req.query.motPasse;
   console.log(nomUtil);
   console.log(motPasse);
-	data = db.connect(function(error ,data)
+**/
+  nomUtil = "utili1";
+  motPasse = "motdepasse";
+	data = db.connect(nomUtil, motPasse, function(error ,data)
 	{
 		if (error == null)
       {
@@ -47,6 +51,8 @@ app.get('/jodle/messages', function (req , res) {
 	})
 
   //res.render('page1');
+
+  res.render('page1');
 })
 
 

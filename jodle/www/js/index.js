@@ -1,22 +1,23 @@
+//LAISSER CETTE LIGNE DE CODE!!!!!!!
+document.addEventListener('deviceready', this.onDeviceReady, false);
 
 function onDeviceReady ()
 {
 
-  $('#temporaire').click(function(){
-    alert('temporaire')
-    window.location = "page2.html"
-  })
-
   $('#connect_form').submit(function(e){
-    window.location = "page1.html"
-    $.get("jodle/messages", "", connect, "html");
+    $.get("http://129.88.241.73:8080/jodle/messages", "", connect, "html");
     e.preventDefault();
   })
-  
-document.getElementById("cameraTakePicture").addEventListener ("click", cameraTakePicture); 
- 
+
+  function connect(){
+    //window.location = "page1.html"
+  }
+
+/**
+document.getElementById("cameraTakePicture").addEventListener ("click", cameraTakePicture);
+
 function cameraTakePicture() {
-   navigator.camera.getPicture(onSuccess, onFail, { 
+   navigator.camera.getPicture(onSuccess, onFail, {
       quality: 50,
       destinationType: Camera.DestinationType.DATA_URL
    });
@@ -31,7 +32,7 @@ function cameraTakePicture() {
    }
 }
 function cameraTakePicture() {
-   navigator.camera.getPicture(onSuccess, onFail, { 
+   navigator.camera.getPicture(onSuccess, onFail, {
       quality: 50,
       destinationType: Camera.DestinationType.DATA_URL
    });
@@ -46,20 +47,18 @@ function cameraTakePicture() {
    }
 }
 
-function connect(){
 
-}
 /* Method online/offline
 
     onOnline: function() {
-       
+
        var pConectionType = document.getElementById('conectionType');
        pConectionType.innerHTML = '<p>Online</p>';
     }
     onOffline: function() {
-     
+
       var pConectionType = document.getElementById('conectionType');
-      pConectionType.innerHTML = '<p>Offline</p>';    	
+      pConectionType.innerHTML = '<p>Offline</p>';
     }
 
     document.addEventListener('online', this.onOnline, false);
@@ -140,3 +139,4 @@ var ft = new FileTransfer();
 ft.upload(fileURL, encodeURI("http://some.server.com/upload.php"), win, fail, options);
 ft.abort();
 */
+}

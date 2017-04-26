@@ -5,9 +5,9 @@ var dbconfig = require('../config/settings.js').settings
 var db = pgp(dbconfig)
 
 
-function getFonctions(trigo, callback)
+function connect(pseudo, motPasse, callback)
 {
-    var requete = `select nom, id from public.fonctions where trigo = ${trigo}`
+    var requete = `select * from public.utilisateur where pseudo = '${pseudo}' AND mdp = '${motPasse}'`
     console.log(requete);
 
     db.any(requete, null)
@@ -78,7 +78,7 @@ function updateFonction(id, x_min, x_max, y_min, y_max, equation, nom, callback)
 }
 
 module.exports = {
-  getFonctions,
+  connect,
   getPseudoUtilisateur,
   getFonction,
   updateFonction,
