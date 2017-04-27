@@ -11,21 +11,19 @@
     <input type="submit" value="Envoyer">
 </form>
 
-       	<div>
-       		<ul>
-       			<li> Accès au  <a href='#messages'> Messages</a> </li>
-       			<li> Accès au  <a href='#videos'> Videos </a> </li>
-       			<li> Accès au  <a href='#photos'> Photos </a> </li>
-       		</ul>
-       	</div>
-<h2 id="photos"> Photos </h2>
-
-
-        <div class="app">
-            <div>
-                <img id="get-picture-result" />
+       	<div class="app">
+            <h1>App Web</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+                <button id = "uploadFile">UPLOAD</button>
+                <button id = "downloadFile">DOWNLOAD</button>
+                <button id = "getPosition">CURRENT POSITION</button>
+                <button id = "watchPosition">WATCH POSITION</button>
+                <button id = "audioCapture">AUDIO</button>
+                <button id = "imageCapture">IMAGE</button>
+                <button id = "videoCapture">VIDEO</button>
             </div>
-            <Button id="take-picture-button">Take Picture</button>
         </div>
 
 </button>
