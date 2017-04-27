@@ -5,13 +5,20 @@ function onDeviceReady ()
 {
 
   $('#connect_form').submit(function(e){
-    $.get("http://129.88.241.73:8080/jodle/messages", "", connect, "html");
+    $.get("http://129.88.241.73:8080/jodle/connect", "", connect, "html");
     e.preventDefault();
   })
 
-  function connect(){
+  function connect(data){
+    console.log(data);
+    $('#body').html(data);
     //window.location = "page1.html"
   }
+
+  $('#message_form').submit(function(e){
+    $.get("http://129.88.241.73:8080/jodle/message", "", connect, "html");
+    e.preventDefault();
+  })
 
 /**
 document.getElementById("cameraTakePicture").addEventListener ("click", cameraTakePicture);

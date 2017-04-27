@@ -30,31 +30,60 @@ io.on('connect', function (socket){
     })
 })
 
-app.get('/jodle/messages', function (req , res) {
-  /**
+app.get('/jodle/connect', function (req , res) {
+  console.log(req.query);
   nomUtil = req.query.nomUtil;
   motPasse = req.query.motPasse;
   console.log(nomUtil);
   console.log(motPasse);
-**/
   nomUtil = "utili1";
   motPasse = "motdepasse";
 	data = db.connect(nomUtil, motPasse, function(error ,data)
 	{
-		if (error == null)
-      {
-      res.status(200).render('page1', {pseudoutilisateur : data});
-      console.log(data);
-      }
+      if (error == null)
+            {
+            res.status(200).render('page1', {data : data});
+            console.log(data);
+            }
 		else
-			res.render('error', {message : error});
+      res.status(200).render('noConnect');
+      console.log(error);
 	})
-
-  //res.render('page1');
-
-  res.render('page1');
 })
 
+app.get('/jodle/message', function (req , res) {
+  message = "hello1";
+  nomUtil = "utili1"
+  db.recupererContacts(nomUtil, function(error ,data)
+  {
+      if (error == null){
+        var contact = data;
+        db.ajouterMessage(nomUtil, message, function(error ,data)
+        {
+          if (error == null){
+            for (var id in contact){
+              db.ajouterMessageContact(contact[id].pseudo, message, function(error ,data)
+              {
+              if (error != null) {
+                res.status(200).render('error', {message : error});
+                console.log(error);
+              }
+            })
+          }
+            res.status(200).render('page1', {data : nomUtil});
+            console.log(data);
+        }else {
+          res.status(200).render('error', {message : error});
+          console.log(error);
+        }
+    	})
+		} else {
+      res.status(200).render('error', {message : error});
+      console.log(error);
+    }
+	})
+
+  })
 
 //
 // le repertoire public va contenir les
