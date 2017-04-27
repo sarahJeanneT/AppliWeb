@@ -31,36 +31,35 @@ io.on('connect', function (socket){
 })
 
 app.get('/jodle/connect', function (req , res) {
-  console.log(req.query);
   nomUtil = req.query.nomUtil;
   motPasse = req.query.motPasse;
-  console.log(nomUtil);
-  console.log(motPasse);
-  nomUtil = "utili1";
-  motPasse = "motdepasse";
+  //console.log(nomUtil);
+  //console.log(motPasse);
+  //nomUtil = "utili1";
+  //motPasse = "motdepasse";
 	data = db.connect(nomUtil, motPasse, function(error ,data)
 	{
-      if (error == null)
-            {
+      if (error == null){
             res.status(200).render('page1', {data : data});
-            console.log(data);
-            }
-		else
+      }	else {
       res.status(200).render('noConnect');
       console.log(error);
+      }
 	})
 })
 
 app.get('/jodle/message', function (req , res) {
-  message = "hello1";
-  nomUtil = "utili1"
+  message = req.query.Message;
+  nomUtil = req.query.nomUtil;
   db.recupererContacts(nomUtil, function(error ,data)
   {
       if (error == null){
+        console.log("récupération des contacts sans erreurs");
         var contact = data;
         db.ajouterMessage(nomUtil, message, function(error ,data)
         {
           if (error == null){
+            console.log("Ajout du message dans la base de données");
             for (var id in contact){
               db.ajouterMessageContact(contact[id].pseudo, message, function(error ,data)
               {
@@ -70,6 +69,7 @@ app.get('/jodle/message', function (req , res) {
               }
             })
           }
+            console.log("Ajout du message dans la base de données 2");
             res.status(200).render('page1', {data : nomUtil});
             console.log(data);
         }else {

@@ -67,10 +67,10 @@ function ajouterMessage(sender, Message, callback)
     })
 }
 
-function updateFonction(id, x_min, x_max, y_min, y_max, equation, nom, callback)
+function ajouterMessageContact(pseudo, message, callback)
 {
-    var trigo = (equation.search("Math.sin") != -1) || (equation.search("Math.cos") != -1) || (equation.search("Math.tan") != -1)
-    var requete = `update fonctions set x_min=${x_min}, x_max = ${x_max},  y_min = ${y_min} , y_max = ${y_max}, nom = '${nom}', equation = '${equation}', trigo = ${trigo} where id=${id}`
+
+    var requete = `insert into recoit values('${message}','${pseudo}', 'en attente')`
 
     console.log(requete);
 
@@ -86,6 +86,6 @@ module.exports = {
   connect,
   getPseudoUtilisateur,
   recupererContacts,
-  updateFonction,
+  ajouterMessageContact,
   ajouterMessage
 };

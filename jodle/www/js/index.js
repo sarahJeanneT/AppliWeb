@@ -1,24 +1,38 @@
+
+
+
 //LAISSER CETTE LIGNE DE CODE!!!!!!!
 document.addEventListener('deviceready', this.onDeviceReady, false);
+document.getElementById("message_form").addEventListener("submit", changePage);
+
 
 function onDeviceReady ()
 {
 
   $('#connect_form').submit(function(e){
-    $.get("http://129.88.241.73:8080/jodle/connect", "", connect, "html");
+    alert("tentative de connection");
+    $.get("http://129.88.241.77:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");
     e.preventDefault();
   })
 
-  function connect(data){
+  function changePage(data){
     console.log(data);
     $('#body').html(data);
     //window.location = "page1.html"
+
+    $('#message_form').submit(function(e){
+    alert("envoie message");
+    $.get("http://129.88.241.77:8080/jodle/message", {Message : document.getElementById('Message').value, nomUtil : document.getElementById('nomUtil').value }, changePage, "html");
+    e.preventDefault();
+    })
+
+    $('#connect_form').submit(function(e){
+      alert("tentative de connection");
+      $.get("http://129.88.241.77:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");
+      e.preventDefault();
+    })
   }
 
-  $('#message_form').submit(function(e){
-    $.get("http://129.88.241.73:8080/jodle/message", "", connect, "html");
-    e.preventDefault();
-  })
 
 /**
 document.getElementById("cameraTakePicture").addEventListener ("click", cameraTakePicture);
