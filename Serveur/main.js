@@ -59,6 +59,7 @@ app.get('/jodle/gps_message', function (req , res) {
             db.getMessages(nomUtil, function(error ,data)
           	{
                 if (error == null){
+                  console.log("Récupération des messages : " + data);
                       res.status(200).render('page1', {data : nomUtil, messages : data});
                 }	else {
                 res.status(200).render('error', {message : error});

@@ -29,7 +29,7 @@ var app = {
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
         document.getElementById("uploadFile").addEventListener("click", uploadFile);
-        document.getElementById("downloadFile").addEventListener("click", downloadFile); 
+        document.getElementById("downloadFile").addEventListener("click", downloadFile);
         document.getElementById("getPosition").addEventListener("click", getPosition);
         document.getElementById("watchPosition").addEventListener("click", watchPosition);
         document.getElementById("audioCapture").addEventListener("click", audioCapture);
@@ -68,13 +68,13 @@ function downloadFile() {
       uri, fileURL, function(entry) {
          console.log("download complete: " + entry.toURL());
       },
-        
+
       function(error) {
          console.log("download error source " + error.source);
          console.log("download error target " + error.target);
          console.log("download error code" + error.code);
       },
-        
+
       false, {
          headers: {
             "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
@@ -87,7 +87,7 @@ function uploadFile() {
    var fileURL = "///storage/emulated/0/DCIM/myFile"
    var uri = encodeURI("http://posttestserver.com/post.php");
    var options = new FileUploadOptions();
-    
+
    options.fileKey = "file";
    options.fileName = fileURL.substr(fileURL.lastIndexOf('/')+1);
    options.mimeType = "text/plain";
@@ -110,7 +110,7 @@ function uploadFile() {
       console.log("upload error source " + error.source);
       console.log("upload error target " + error.target);
    }
-    
+
 }
 
 function getPosition() {
@@ -119,7 +119,7 @@ function getPosition() {
       enableHighAccuracy: true,
       maximumAge: 3600000
    }
-    
+
    var watchID = navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 
    function onSuccess(position) {
@@ -178,7 +178,7 @@ function audioCapture() {
 
    function onSuccess(mediaFiles) {
       var i, path, len;
-        
+
       for (i = 0, len = mediaFiles.length; i < len; i += 1) {
          path = mediaFiles[i].fullPath;
          console.log(mediaFiles);
@@ -188,7 +188,7 @@ function audioCapture() {
    function onError(error) {
       navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
    }
-    
+
 }
 
 function imageCapture() {
@@ -201,7 +201,7 @@ function imageCapture() {
 
    function onSuccess(mediaFiles) {
       var i, path, len;
-        
+
       for (i = 0, len = mediaFiles.length; i < len; i += 1) {
          path = mediaFiles[i].fullPath;
          console.log(mediaFiles);
@@ -211,7 +211,7 @@ function imageCapture() {
    function onError(error) {
       navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
    }
-    
+
 }
 
 function videoCapture() {
@@ -225,7 +225,7 @@ function videoCapture() {
 
    function onSuccess(mediaFiles) {
       var i, path, len;
-        
+
       for (i = 0, len = mediaFiles.length; i < len; i += 1) {
          path = mediaFiles[i].fullPath;
          console.log(mediaFiles);
@@ -235,8 +235,8 @@ function videoCapture() {
    function onError(error) {
       navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
    }
-    
+
 }
-   
+
 
 app.initialize();
