@@ -109,11 +109,15 @@ function updateGPS(pseudo, longitude, latitude, callback)
 
 function getMessages(nomUtil, callback)
 {
+  var now = new Date();
+  now.setMinutes(now.getMinutes() - 10);
+  var strDate = now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+
     var requete = `select distinct r.idMessage, v.pseudo, m.content from message m,
       recoit r, utilisateur u, utilisateur v where r.idMessage=m.id and
       r.pseudoReceiver='${nomUtil}' and r.etat='en attente' and
       m.pseudoSender=v.pseudo and u.pseudo='${nomUtil}' and v.pseudo!='${nomUtil}' and
-      (st_distance(u.gps,v.gps)<5000)`
+      (st_distance(u.gps,v.gps)<5000 and m.dateEnvoie > TIMESTAMP '${strDate}')`
     console.log(requete);
 
     db.any(requete, null)
