@@ -33,14 +33,28 @@ function onDeviceReady ()
     window.location = "index.html";
     })
 
+    $('#imageCapture').click(function(){
+    alert("bouton image");
+    var options = { limit: 1};
+    navigator.device.capture.captureImage(onSuccess, onError, options);
+    function onSuccess(mediaFiles) {
+      var i, path, len;
+      for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+        path = mediaFiles[i].fullPath;
+        console.log(mediaFiles);
+      }
+    }
+    function onError(error) {
+      navigator.notification.alert('Error code: ' + error.code, null, 'Capture Error');
+    }
+    })
+
     $('#chargeMessages').click(function(){
       var options = {
          enableHighAccuracy: true,
          maximumAge: 3600000
       }
-
      var watchID = navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
-
      function onSuccess(position) {
         alert('Latitude: '+ position.coords.latitude + '\n' +
                'Longitude: '+ position.coords.longitude + '\n' );

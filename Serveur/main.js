@@ -42,7 +42,17 @@ app.get('/jodle/connect', function (req , res) {
 	data = db.connect(nomUtil, motPasse, function(error ,data)
 	{
       if (error == null){
-            res.status(200).render('page1', {data : data, messages : null});
+          console.log("Connexion réussie");
+        db.getMessages(nomUtil, function(error ,data)
+        {
+            if (error == null){
+              console.log("Récup Message réussie");
+                  res.status(200).render('page1', {data : nomUtil, messages : data});
+            }	else {
+            res.status(200).render('error', {message : error});
+            console.log(error);
+            }
+        })
       }	else {
       res.status(200).render('noConnect');
       console.log(error);
@@ -56,16 +66,15 @@ app.get('/jodle/gps_message', function (req , res) {
 	{
       if (error == null){
         console.log("Modification de la longitude et la latitude réussie");
-            db.getMessages(nomUtil, function(error ,data)
-          	{
-                if (error == null){
-                  console.log("Récupération des messages : " + data);
-                      res.status(200).render('page1', {data : nomUtil, messages : data});
-                }	else {
-                res.status(200).render('error', {message : error});
-                console.log(error);
-                }
-          	})
+        db.getMessages(nomUtil, function(error, data)
+        {
+            if (error == null){
+                  res.status(200).render('page1', {data : nomUtil, messages : data});
+            }	else {
+            res.status(200).render('error', {message : error});
+            console.log(error);
+            }
+        })
       }	else {
       res.status(200).render('error', {message : error});
       console.log(error);
@@ -116,6 +125,11 @@ app.get('/jodle/message', function (req , res) {
 	})
 
   })
+
+function chargerNouveauxMessage(nomUtil){
+
+}
+
 
 //
 // le repertoire public va contenir les
