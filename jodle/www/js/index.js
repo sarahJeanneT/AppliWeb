@@ -1,17 +1,19 @@
-
-
-
 //LAISSER CETTE LIGNE DE CODE!!!!!!!
 document.addEventListener('deviceready', this.onDeviceReady, false);
-document.getElementById("message_form").addEventListener("submit", changePage);
 
 
 function onDeviceReady ()
 {
 
   $('#connect_form').submit(function(e){
-    alert("tentative de connection");
-    $.get("http://129.88.241.77:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");
+    $('#nomUtil_definitif').val(document.getElementById('nomUtil').value);
+    $.get("http://129.88.241.140:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");
+    socket = io();
+    socket.on('message', function(points){
+      //var data = new vis.DataSet(points)
+      //graph.setData(data)
+      //graph.redraw();
+    });
     e.preventDefault();
   })
 
@@ -21,14 +23,13 @@ function onDeviceReady ()
     //window.location = "page1.html"
 
     $('#message_form').submit(function(e){
-    alert("envoie message");
-    $.get("http://129.88.241.77:8080/jodle/message", {Message : document.getElementById('Message').value, nomUtil : document.getElementById('nomUtil').value }, changePage, "html");
+    $.get("http://129.88.241.140:8080/jodle/message", {Message : document.getElementById('Message').value, nomUtil : document.getElementById('nomUtil_definitif').value }, changePage, "html");
     e.preventDefault();
     })
 
     $('#connect_form').submit(function(e){
-      alert("tentative de connection");
-      $.get("http://129.88.241.77:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");
+      $('#nomUtil_definitif').val(document.getElementById('nomUtil').value);
+      $.get("http://129.88.241.140:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");
       e.preventDefault();
     })
   }

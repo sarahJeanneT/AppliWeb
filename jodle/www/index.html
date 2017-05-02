@@ -28,8 +28,9 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <!--
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com http://129.88.241.77:8080 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com http://129.88.241.140:8080 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+      <!--
         <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com http://129.88.241.77:8080 'unsafe-eval'; style-src 'self'; media-src *; img-src 'self' data: content:;">
       -->
 
@@ -39,6 +40,9 @@
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <title>Hello World</title>
     </head>
+
+    <input type="hidden" id="nomUtil_definitif"/>
+
     <body>
        <div class="app"  id = "body">
             <h1>Jodle</h1>

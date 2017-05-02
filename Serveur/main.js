@@ -7,7 +7,7 @@ var io = require('socket.io')(server);
 var mustacheExpress = require('mustache-express');
 var db = require('./db/pg_jodle.js');
 //var surface_router = require('./routes/surfaces_ctrl');
-//var surface_services = require('./services/surfaces')
+var socket_services = require('./services/socket')
 
 app.use(bodyParser.urlencoded({     // pour gérer les URL-encoded bodies (envoie formulaire en POST)
   extended: true
@@ -22,11 +22,11 @@ app.set('view engine', 'mustache');
 
 io.on('connect', function (socket){
     console.log("Start animation");
-    surface_services.animationOn(socket)
+    socket_services.animationOn(socket)
 
     socket.on('disconnect', function(){
         console.log("Stop animation")
-        surface_services.animationOff(socket)
+        socket_services.animationOff(socket)
     })
 })
 
