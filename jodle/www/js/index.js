@@ -13,7 +13,7 @@ function onDeviceReady ()
       //var data = new vis.DataSet(points)
       //graph.setData(data)
       //graph.redraw();
-    });
+    //});
     e.preventDefault();
   })
 
