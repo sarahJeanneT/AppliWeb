@@ -8,8 +8,8 @@ function onDeviceReady ()
   $('#connect_form').submit(function(e){
     $('#nomUtil_definitif').val(document.getElementById('nomUtil').value);
     $.get("http://129.88.241.140:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");
-    socket = io();
-    socket.on('message', function(points){
+    //socket = io();
+    //socket.on('message', function(points){
       //var data = new vis.DataSet(points)
       //graph.setData(data)
       //graph.redraw();
