@@ -34,6 +34,20 @@ function getPseudoUtilisateur(callback)
     })
 }
 
+function getIdMax(callback)
+{
+    var requete = 'select MAX(id) as maximum from public.Message'
+    console.log(requete);
+
+    db.one(requete, null)
+            .then(function (data)  {
+                callback(null, data)
+    })
+            .catch(function(error)  {
+                callback(error, null)
+    })
+}
+
 function recupererContacts(numUtil, callback)
 {
 
@@ -50,12 +64,12 @@ function recupererContacts(numUtil, callback)
     })
 }
 
-function ajouterMessage(sender, Message, callback)
+function ajouterMessage(IdMessage, sender, Message, callback)
 {
   var now = new Date();
   var strDate = now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
 
-    var requete = `insert into message values('${Message}',TIMESTAMP '${strDate}','${sender}')`
+    var requete = `insert into message values(${IdMessage},'${Message}', 'text',TIMESTAMP '${strDate}','${sender}')`
 
     console.log(requete);
 
@@ -67,10 +81,10 @@ function ajouterMessage(sender, Message, callback)
     })
 }
 
-function ajouterMessageContact(pseudo, message, callback)
+function ajouterMessageContact(IdMessage, pseudo, callback)
 {
 
-    var requete = `insert into recoit values('${message}','${pseudo}', 'en attente')`
+    var requete = `insert into recoit values(${IdMessage},'${pseudo}', 'en attente')`
 
     console.log(requete);
 
@@ -84,6 +98,7 @@ function ajouterMessageContact(pseudo, message, callback)
 
 module.exports = {
   connect,
+  getIdMax,
   getPseudoUtilisateur,
   recupererContacts,
   ajouterMessageContact,

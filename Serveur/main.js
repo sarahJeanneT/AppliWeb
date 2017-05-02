@@ -53,32 +53,39 @@ app.get('/jodle/connect', function (req , res) {
 app.get('/jodle/message', function (req , res) {
   message = req.query.Message;
   nomUtil = req.query.nomUtil;
-  db.recupererContacts(nomUtil, function(error ,data)
-  {
+  db.recupererContacts(nomUtil, function(error ,data){
       if (error == null){
         console.log("récupération des contacts sans erreurs");
         var contact = data;
-        db.ajouterMessage(nomUtil, message, function(error ,data)
-        {
+        db.getIdMax(function(error, data){
           if (error == null){
-            console.log("Ajout du message dans la base de données");
-            for (var id in contact){
-              db.ajouterMessageContact(contact[id].pseudo, message, function(error ,data)
-              {
-              if (error != null) {
-                res.status(200).render('error', {message : error});
-                console.log(error);
+            console.log("Récupération de l'ID Max sans erreurs");
+            var IdMessage = data.maximum + 1;
+            db.ajouterMessage(IdMessage, nomUtil, message, function(error ,data){
+              if (error == null){
+                console.log("Ajout du message dans la base de données");
+                for (var id in contact){
+                  db.ajouterMessageContact(IdMessage, contact[id].pseudo, function(error ,data)
+                  {
+                    if (error != null) {
+                      res.status(200).render('error', {message : error});
+                    console.log(error);
+                  }
+                })
               }
-            })
+                console.log("Ajout du message dans la base de données 2");
+                res.status(200).render('page1', {data : nomUtil});
+                console.log(data);
+          } else {
+            res.status(200).render('error', {message : error});
+            console.log(error);
           }
-            console.log("Ajout du message dans la base de données 2");
-            res.status(200).render('page1', {data : nomUtil});
-            console.log(data);
-        }else {
-          res.status(200).render('error', {message : error});
-          console.log(error);
+        })
+      } else {
+        res.status(200).render('error', {message : error});
+        console.log(error);
         }
-    	})
+      })
 		} else {
       res.status(200).render('error', {message : error});
       console.log(error);

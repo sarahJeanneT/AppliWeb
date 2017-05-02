@@ -2,22 +2,19 @@
 document.addEventListener('deviceready', this.onDeviceReady, false);
 
 
+
 function onDeviceReady ()
 {
 
   $('#connect_form').submit(function(e){
     $('#nomUtil_definitif').val(document.getElementById('nomUtil').value);
-    $.get("http://129.88.241.140:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");
-    //socket = io();
-    //socket.on('message', function(points){
-      //var data = new vis.DataSet(points)
-      //graph.setData(data)
-      //graph.redraw();
-    //});
+    $.get("http://129.88.241.140:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");;
     e.preventDefault();
   })
 
+
   function changePage(data){
+    setInterval(gps_message, 1000);
     console.log(data);
     $('#body').html(data);
     //window.location = "page1.html"
@@ -32,6 +29,28 @@ function onDeviceReady ()
       $.get("http://129.88.241.140:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");
       e.preventDefault();
     })
+
+    function gps_message() {
+      //gps
+
+
+      var options = {
+         enableHighAccuracy: true,
+         maximumAge: 3600000
+      }
+
+     var watchID = navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+
+     function onSuccess(position) {
+            alert('Latitude: '          + position.coords.latitude          + '\n' +
+               'Longitude: '         + position.coords.longitude         + '\n' );
+         }
+     function onError(error) {
+            alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+         }
+
+     }
+
   }
 
 
