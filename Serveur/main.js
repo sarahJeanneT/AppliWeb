@@ -42,9 +42,31 @@ app.get('/jodle/connect', function (req , res) {
 	data = db.connect(nomUtil, motPasse, function(error ,data)
 	{
       if (error == null){
-            res.status(200).render('page1', {data : data});
+            res.status(200).render('page1', {data : data, messages : null});
       }	else {
       res.status(200).render('noConnect');
+      console.log(error);
+      }
+	})
+})
+
+app.get('/jodle/gps_message', function (req , res) {
+  nomUtil = req.query.nomUtil;
+	data = db.updateGPS(nomUtil, req.query.longitude, req.query.latitude, function(error ,data)
+	{
+      if (error == null){
+        console.log("Modification de la longitude et la latitude réussie");
+            db.getMessages(nomUtil, function(error ,data)
+          	{
+                if (error == null){
+                      res.status(200).render('page1', {data : nomUtil, messages : data});
+                }	else {
+                res.status(200).render('error', {message : error});
+                console.log(error);
+                }
+          	})
+      }	else {
+      res.status(200).render('error', {message : error});
       console.log(error);
       }
 	})
@@ -74,7 +96,7 @@ app.get('/jodle/message', function (req , res) {
                 })
               }
                 console.log("Ajout du message dans la base de données 2");
-                res.status(200).render('page1', {data : nomUtil});
+                res.status(200).render('page1', {data : nomUtil, messages : null});
                 console.log(data);
           } else {
             res.status(200).render('error', {message : error});

@@ -15,6 +15,7 @@ function onDeviceReady ()
 
   function changePage(data){
     setInterval(gps_message, 1000);
+
     console.log(data);
     $('#body').html(data);
     //window.location = "page1.html"
@@ -32,8 +33,6 @@ function onDeviceReady ()
 
     function gps_message() {
       //gps
-
-
       var options = {
          enableHighAccuracy: true,
          maximumAge: 3600000
@@ -42,12 +41,18 @@ function onDeviceReady ()
      var watchID = navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 
      function onSuccess(position) {
-            alert('Latitude: '          + position.coords.latitude          + '\n' +
-               'Longitude: '         + position.coords.longitude         + '\n' );
-         }
+        alert('Latitude: '+ position.coords.latitude + '\n' +
+               'Longitude: '+ position.coords.longitude + '\n' );
+        $.get("http://129.88.241.140:8080/jodle/GPS_Message",
+          {nomUtil : document.getElementById('nomUtil_definitif').value,
+            longitude : position.coords.longitude,
+            latitude : position.coords.latitude },
+          changePage, "html");
+     }
      function onError(error) {
-            alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
-         }
+        alert('Impossible de récupérer les coordonées GPS \n' +
+        'code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+     }
 
      }
 
