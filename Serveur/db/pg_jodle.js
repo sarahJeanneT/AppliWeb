@@ -113,11 +113,11 @@ function getMessages(nomUtil, callback)
   now.setMinutes(now.getMinutes() - 10);
   var strDate = now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
 
-    var requete = `select distinct r.idMessage, v.pseudo, m.content from message m,
+    var requete = `select distinct r.idMessage, v.pseudo, m.content, m.dateEnvoie from message m,
       recoit r, utilisateur u, utilisateur v where r.idMessage=m.id and
       r.pseudoReceiver='${nomUtil}' and r.etat='en attente' and
       m.pseudoSender=v.pseudo and u.pseudo='${nomUtil}' and v.pseudo!='${nomUtil}' and
-      (st_distance(u.gps,v.gps)<5000 and m.dateEnvoie > TIMESTAMP '${strDate}')`
+      (st_distance(u.gps,v.gps)<5000 and m.dateEnvoie > TIMESTAMP '${strDate}' ORDER BY m.dateEnvoie desc)`
     console.log(requete);
 
     db.any(requete, null)
