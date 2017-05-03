@@ -8,7 +8,8 @@ function onDeviceReady ()
 
   $('#connect_form').submit(function(e){
     $('#nomUtil_definitif').val(document.getElementById('nomUtil').value);
-    $.get("http://129.88.241.77:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");;
+    $('#motPasse_definitif').val(document.getElementById('motPasse').value);
+    $.get("http://129.88.242.127:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");;
     e.preventDefault();
   })
 
@@ -20,13 +21,28 @@ function onDeviceReady ()
     //window.location = "page1.html"
 
     $('#message_form').submit(function(e){
-    $.get("http://129.88.241.77:8080/jodle/message", {Message : document.getElementById('Message').value, nomUtil : document.getElementById('nomUtil_definitif').value }, changePage, "html");
+    $.get("http://129.88.242.127:8080/jodle/message", {Message : document.getElementById('Message').value, nomUtil : document.getElementById('nomUtil_definitif').value }, changePage, "html");
+    e.preventDefault();
+    })
+
+    $('#Retour').click(function(e){
+    $.get("http://129.88.242.127:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil_definitif').value, motPasse : document.getElementById('motPasse_definitif').value}, changePage, "html");
+    e.preventDefault();
+    })
+
+    $('#contacts').click(function(){
+    $.get("http://129.88.242.127:8080/jodle/contact", {nomUtil : document.getElementById('nomUtil_definitif').value }, changePage, "html");
+    })
+
+    $('#contact_form').submit(function(e){
+    $.get("http://129.88.242.127:8080/jodle/ajouterContact", {contact : document.getElementById('contact').value, nomUtil : document.getElementById('nomUtil_definitif').value }, changePage, "html");
     e.preventDefault();
     })
 
     $('#connect_form').submit(function(e){
       $('#nomUtil_definitif').val(document.getElementById('nomUtil').value);
-      $.get("http://129.88.241.77:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");
+      $('#motPasse_definitif').val(document.getElementById('motPasse').value);
+      $.get("http://129.88.242.127:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");
       e.preventDefault();
     })
 
@@ -50,7 +66,7 @@ function onDeviceReady ()
           var reader = new FileReader();
           reader.onloadend = function(e) {
              console.log("Text is: "+this.result);
-             $.get("http://129.88.241.77:8080/jodle/message", {Message : this.result, nomUtil : document.getElementById('nomUtil_definitif').value }, changePage, "html");
+             $.get("http://129.88.242.127:8080/jodle/message", {Message : this.result, nomUtil : document.getElementById('nomUtil_definitif').value }, changePage, "html");
              //document.querySelector("#textArea").innerHTML = this.result;
          }
          reader.readAsText(file);
@@ -74,7 +90,7 @@ function onDeviceReady ()
      function onSuccess(position) {
         alert('Latitude: '+ position.coords.latitude + '\n' +
                'Longitude: '+ position.coords.longitude + '\n' );
-        $.get("http://129.88.241.77:8080/jodle/GPS_Message",
+        $.get("http://129.88.242.127:8080/jodle/GPS_Message",
           {nomUtil : document.getElementById('nomUtil_definitif').value,
             longitude : position.coords.longitude,
             latitude : position.coords.latitude },
@@ -83,7 +99,7 @@ function onDeviceReady ()
      function onError(error) {
         alert('Impossible de récupérer les coordonées GPS \n' +
         'code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
-        $.get("http://129.88.241.77:8080/jodle/GPS_Message",
+        $.get("http://129.88.242.127:8080/jodle/GPS_Message",
           {nomUtil : document.getElementById('nomUtil_definitif').value,
             longitude : 0, latitude : 0}, changePage, "html");
         }

@@ -1,12 +1,11 @@
 
-<div class="app">
+<div class="app2" id="page1">
 {{ #data }}
 <h1 id="top"> Bienvenue  {{pseudo}}</h1>
-<p> </p>
-
+<h2> Nouveaux Messages </h2>
 {{ #messages }}
 <p> </p>
-<p> Nouveau Message de {{pseudo}} : </p>
+<h3> {{pseudo}} : </h3>
 <p> {{content}} </p>
 <p> </p>
 {{ /messages}}
@@ -21,11 +20,7 @@
 {{ /data }}
 <p> </p>
                 <button id = "chargeMessages">Charger Messages</button>
-                <button id = "audioCapture">AUDIO</button>
-                <button id = "imageCapture">IMAGE</button>
-                <button id = "videoCapture">VIDEO</button>
+                <button id = "contacts">Gestion des Contacts</button>
                 <button id = "deconnect">Déconnexion</button>
 
         </div>
-
-</button>
