@@ -117,7 +117,7 @@ function getMessages(nomUtil, callback)
       recoit r, utilisateur u, utilisateur v where r.idMessage=m.id and
       r.pseudoReceiver='${nomUtil}' and r.etat='en attente' and
       m.pseudoSender=v.pseudo and u.pseudo='${nomUtil}' and v.pseudo!='${nomUtil}' and
-      (st_distance(u.gps,v.gps)<5000 and m.dateEnvoie > TIMESTAMP '${strDate}' ORDER BY m.dateEnvoie desc)`
+      (st_distance(u.gps,v.gps)<5000) and m.dateEnvoie > TIMESTAMP '${strDate}' ORDER BY m.dateEnvoie desc`
     console.log(requete);
 
     db.any(requete, null)
