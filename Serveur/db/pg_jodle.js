@@ -197,10 +197,7 @@ module.exports = {
   ajouterMessage,
   updateGPS,
   getMessages,
-<<<<<<< HEAD
-  enregistrer
-=======
+  enregistrer,
   getContacts,
   ajouterContact
->>>>>>> b7bc01415bb78c940bce7d761fa01b76d7638a56
 };

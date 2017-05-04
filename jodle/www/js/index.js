@@ -8,12 +8,9 @@ function onDeviceReady ()
 
   $('#connect_form').submit(function(e){
     $('#nomUtil_definitif').val(document.getElementById('nomUtil').value);
-<<<<<<< HEAD
-    $.get("http://129.88.241.83:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");;
-=======
+
     $('#motPasse_definitif').val(document.getElementById('motPasse').value);
-    $.get("http://129.88.241.84:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");;
->>>>>>> b7bc01415bb78c940bce7d761fa01b76d7638a56
+    $.get("http://129.88.241.84:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");
     e.preventDefault();
   })
 
@@ -41,9 +38,6 @@ function onDeviceReady ()
     })
 
     $('#message_form').submit(function(e){
-<<<<<<< HEAD
-    $.get("http://129.88.241.83:8080/jodle/message", {Message : document.getElementById('Message').value, nomUtil : document.getElementById('nomUtil_definitif').value }, changePage, "html");
-=======
     $.get("http://129.88.241.84:8080/jodle/message", {Message : document.getElementById('Message').value, nomUtil : document.getElementById('nomUtil_definitif').value }, changePage, "html");
     e.preventDefault();
     })
@@ -59,13 +53,11 @@ function onDeviceReady ()
 
     $('#contact_form').submit(function(e){
     $.get("http://129.88.241.84:8080/jodle/ajouterContact", {contact : document.getElementById('contact').value, nomUtil : document.getElementById('nomUtil_definitif').value }, changePage, "html");
->>>>>>> b7bc01415bb78c940bce7d761fa01b76d7638a56
     e.preventDefault();
     })
 
     $('#connect_form').submit(function(e){
       $('#nomUtil_definitif').val(document.getElementById('nomUtil').value);
-<<<<<<< HEAD
       $.get("http://129.88.241.83:8080/jodle/connect", {nomUtil : document.getElementById('nomUtil').value, motPasse : document.getElementById('motPasse').value }, changePage, "html");
       e.preventDefault();
     })
@@ -108,11 +100,7 @@ function onDeviceReady ()
           var reader = new FileReader();
           reader.onloadend = function(e) {
              console.log("Text is: "+this.result);
-<<<<<<< HEAD
              $.get("http://129.88.241.83:8080/jodle/message", {Message : this.result, nomUtil : document.getElementById('nomUtil_definitif').value }, changePage, "html");
-=======
-             $.get("http://129.88.241.84:8080/jodle/message", {Message : this.result, nomUtil : document.getElementById('nomUtil_definitif').value }, changePage, "html");
->>>>>>> b7bc01415bb78c940bce7d761fa01b76d7638a56
              //document.querySelector("#textArea").innerHTML = this.result;
          }
          reader.readAsText(file);
@@ -138,11 +126,7 @@ function onDeviceReady ()
      function onSuccess(position) {
         alert('Latitude: '+ position.coords.latitude + '\n' +
                'Longitude: '+ position.coords.longitude + '\n' );
-<<<<<<< HEAD
         $.get("http://129.88.241.83:8080/jodle/GPS_Message",
-=======
-        $.get("http://129.88.241.84:8080/jodle/GPS_Message",
->>>>>>> b7bc01415bb78c940bce7d761fa01b76d7638a56
           {nomUtil : document.getElementById('nomUtil_definitif').value,
             longitude : position.coords.longitude,
             latitude : position.coords.latitude },
@@ -151,11 +135,7 @@ function onDeviceReady ()
      function onError(error) {
         alert('Impossible de récupérer les coordonées GPS \n' +
         'code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
-<<<<<<< HEAD
         $.get("http://129.88.241.83:8080/jodle/GPS_Message",
-=======
-        $.get("http://129.88.241.84:8080/jodle/GPS_Message",
->>>>>>> b7bc01415bb78c940bce7d761fa01b76d7638a56
           {nomUtil : document.getElementById('nomUtil_definitif').value,
             longitude : 0, latitude : 0}, changePage, "html");
         }
