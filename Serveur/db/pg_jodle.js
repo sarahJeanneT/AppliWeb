@@ -161,7 +161,7 @@ function getMessages(nomUtil, callback)
 function getContacts(nomUtil, callback)
 {
 
-    var requete = `select pseudoReceiver as contact from public.contact where pseudoSender = '${nomUtil}'`
+    var requete = `select pseudoSender as contact from public.contact where pseudoReceiver = '${nomUtil}'`
     console.log(requete);
 
     db.any(requete, null)
@@ -176,7 +176,7 @@ function getContacts(nomUtil, callback)
 function ajouterContact(nomUtil, nomUtil2, callback)
 {
 
-    var requete = `insert into public.contact values('${nomUtil}', '${nomUtil2}')`
+    var requete = `insert into public.contact values('${nomUtil2}', '${nomUtil}')`
     console.log(requete);
 
     db.none(requete, null)
