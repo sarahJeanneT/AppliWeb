@@ -19,6 +19,35 @@ function connect(pseudo, motPasse, callback)
     })
 }
 
+function enregistrer(pseudo, mdp, callback)
+{
+    var requete = `insert into utilisateur values ('${pseudo}',null,'${mdp}','offline')`
+    console.log(requete);
+
+    db.none(requete, null).
+            then(function (data) {
+                callback();
+    }).catch(function(error) {
+            callback(error, null) // devrait normalement remonte à la page web
+    })
+}
+
+
+/*
+function effacer(pseudo, callback)
+{
+    var requete = `delete from utilisateur where pseudo='${pseudo}'`
+    console.log(requete);
+
+    db.none(requete, null).
+            then(function (data) {
+                callback();
+    }).catch(function(error) {
+            callback(error, null) // devrait normalement remonte à la page web
+    })
+}
+*/
+
 
 function getPseudoUtilisateur(callback)
 {
@@ -137,5 +166,6 @@ module.exports = {
   ajouterMessageContact,
   ajouterMessage,
   updateGPS,
-  getMessages
+  getMessages,
+  enregistrer
 };

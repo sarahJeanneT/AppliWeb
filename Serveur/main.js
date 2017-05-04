@@ -60,6 +60,40 @@ app.get('/jodle/connect', function (req , res) {
 	})
 })
 
+app.get('/jodle/creeruti', function (req , res) {
+      res.status(200).render('page2', {data : null});
+})
+
+
+app.get('/jodle/enregistrement', function (req , res) {
+  pseudo = req.query.Pseudo;
+  mdp = req.query.Mdp;
+	data = db.enregistrer(pseudo, mdp, function(error ,data)
+	{
+
+    if (error == null){
+          console.log(2);
+          res.status(200).render('page3', {data : pseudo, messages : data});
+    }	else {
+          console.log(1);
+          console.log(error);
+          res.status(200).render('noRegister');
+    }
+
+	})
+})
+
+
+/*
+app.get('/jodle/peffacer', function (req , res) {
+	{
+          res.status(200).render('page4', {data : pseudo});
+	})
+*/
+
+
+
+
 app.get('/jodle/gps_message', function (req , res) {
   nomUtil = req.query.nomUtil;
 	data = db.updateGPS(nomUtil, req.query.longitude, req.query.latitude, function(error ,data)
