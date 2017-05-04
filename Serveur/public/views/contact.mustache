@@ -1,0 +1,24 @@
+
+<div class="app2" id="page1">
+
+{{ #data }}
+<h1 id="top"> Bienvenue  {{pseudo}}</h1>
+{{ /data }}
+<h2> Contacts </h2>
+{{ #contacts }}
+<p> </p>
+<h3> {{contact}} </h3>
+<p> </p>
+{{ /contacts }}
+  {{erreur}}
+<form id="contact_form">
+    <div class="form-group">
+        <label for="Message">Nouveau Contact:</label>
+        <input type="text" name="contact" id="contact" class="form-control" height="100" required="required"/>
+    </div>
+    <input type="submit" value="AjouterContact">
+</form>
+<p> </p>
+                <button id = "Retour">Retour aux Messages</button>
+
+        </div>

@@ -158,6 +158,36 @@ function getMessages(nomUtil, callback)
     })
 }
 
+function getContacts(nomUtil, callback)
+{
+
+    var requete = `select pseudoReceiver as contact from public.contact where pseudoSender = '${nomUtil}'`
+    console.log(requete);
+
+    db.any(requete, null)
+            .then(function (data)  {
+                callback(null, data)
+    })
+            .catch(function(error)  {
+                callback(error, null)
+    })
+}
+
+function ajouterContact(nomUtil, nomUtil2, callback)
+{
+
+    var requete = `insert into public.contact values('${nomUtil}', '${nomUtil2}')`
+    console.log(requete);
+
+    db.none(requete, null)
+            .then(function (data)  {
+                callback(null, data)
+    })
+            .catch(function(error)  {
+                callback(error, null)
+    })
+}
+
 module.exports = {
   connect,
   getIdMax,
@@ -167,5 +197,10 @@ module.exports = {
   ajouterMessage,
   updateGPS,
   getMessages,
+<<<<<<< HEAD
   enregistrer
+=======
+  getContacts,
+  ajouterContact
+>>>>>>> b7bc01415bb78c940bce7d761fa01b76d7638a56
 };

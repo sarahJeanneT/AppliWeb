@@ -11,3 +11,8 @@ suivre le fichier
 
 lancer node :
 node /user/8/gardellc/Documents/ApplisWeb/AppliWeb/Serveur/main.js
+
+plugin
+GPS
+
+psql -U gardellc -h ensibd gardellc
