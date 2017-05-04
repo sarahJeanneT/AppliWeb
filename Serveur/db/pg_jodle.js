@@ -132,7 +132,7 @@ function getMessages(nomUtil, callback)
 function getContacts(nomUtil, callback)
 {
 
-    var requete = `select * from public.contact where pseudoSender = '${nomUtil}'`
+    var requete = `select pseudoReceiver as contact from public.contact where pseudoSender = '${nomUtil}'`
     console.log(requete);
 
     db.any(requete, null)

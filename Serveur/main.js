@@ -99,15 +99,29 @@ app.get('/jodle/contact', function (req , res) {
 app.get('/jodle/ajouterContact', function (req , res) {
   nomUtil = req.query.nomUtil;
   contact = req.query.contact;
+  strErreur = null;
 	data = db.ajouterContact(nomUtil, contact, function(error ,data)
 	{
       if (error == null){
         console.log("Ajouter contact réussi");
-        res.status(200).render('contact', {data : nomUtil, contacts : data, erreur : null});
+        //res.status(200).render('contact', {data : nomUtil, contacts : data, erreur : null});
       }	else {
-      res.status(200).render('contact', {data : nomUtil, contacts : data, erreur : "impossible d'ajouter ce contact"});
+      //res.status(200).render('contact', {data : nomUtil, contacts : data, erreur : "impossible d'ajouter ce contact"});
+      strErreur = "impossible d'ajouter ce contact";
       console.log(error);
       }
+      data = db.getContacts(nomUtil, function(error ,data)
+	     {
+         if (error == null){
+          console.log("getcontact réussi");
+          res.status(200).render('contact', {data : nomUtil, contacts : data, erreur : strErreur});
+        }	else {
+          res.status(200).render('error', {message : error});
+          console.log(error);
+        }
+	})
+
+
 	})
 })
 
